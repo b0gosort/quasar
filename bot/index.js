@@ -4,7 +4,12 @@ const config = require("../config.json");
 
 client.on("ready", () => {
 	console.log("Quasar is ready!");
+	console.log(config.joinLog);
 });
+
+client.on("guildMemberAdd", (member) => {
+	member.guild.channels.get(config.joinLog).send(`${member.user.username} has joined the server.`);
+})
 
 client.on("message", (message) => {
 	if (!message.content.startsWith(config.prefix) || message.author.bot) return;
