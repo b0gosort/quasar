@@ -17,9 +17,13 @@ client.on("message", (message) => {
 	const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 	const command = args.shift().toLowerCase();
 
+	//Test
 	if (command === "test") {
 		message.channel.send("Quasar is operational.");
-	} else if (command === "ban") {
+	}
+
+	//Ban
+	else if (command === "ban") {
 		let target = args[0];
 		if (target == null) {
 			message.channel.send("No target was specified.");
@@ -32,7 +36,10 @@ client.on("message", (message) => {
 			}
 			message.channel.send("Sorry, but Quasar doesn't yet have that feature.");
 		}
-	} else if (command === "echo") {
+	}
+
+	//Echo
+	else if (command === "echo") {
 		let text = args.slice(0).join(" ");
 		message.channel.send(text);
 	}
