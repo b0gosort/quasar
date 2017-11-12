@@ -11,9 +11,7 @@ client.on("message", (message) => {
 
 	if (message.content.startsWith(config.prefix + "test")) {
 		message.channel.send("Quasar is working.");
-	}
-
-	if (message.content.startsWith(config.prefix + "ban esti")) {
+	} else if (message.content.startsWith(config.prefix + "ban esti")) {
 		message.channel.send("**Esteriore** is no longer in the server.");
 	}
 });
