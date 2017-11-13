@@ -6,5 +6,5 @@ exports.run = (client, message, args, config) => {
 	let numMessages = args[0];
 	if (numMessages < 2) return message.channel.send("The number provided was too low.");
 	message.channel.bulkDelete(parseInt(numMessages) + 1);
-	message.channel.send(`${numMessages} messages from the past 2 weeks have been deleted.`);
+	message.channel.send(`${numMessages} messages were removed.`);
 }
