@@ -14,6 +14,10 @@ client.on("guildMemberAdd", (member) => {
 	member.guild.channels.get(config.joinLog).send(`**${member.user.username}** has joined the server.`);
 });
 
+client.on("guildMemberRemove", (member) => {
+	member.guild.channels.get(config.joinLog).send(`**${member.user.username}** is no longer in the server.`);
+})
+
 client.on("message", (message) => {
 	if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
