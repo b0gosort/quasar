@@ -24,19 +24,8 @@ client.on("message", (message) => {
 	}
 
 	//Ban
-	else if (command === "ban") {
-		let target = args[0];
-		if (target == null) {
-			message.channel.send("No target was specified.");
-		} else if (target.toLowerCase() === "esti") {
-			message.channel.send("**Esteriore** is no longer in the server.")
-		} else {
-			if (message.author.id !== config.ownerID) {
-				message.channel.send("You don't have permission to use the command ``ban``.");
-				return;
-			}
-			message.channel.send("Sorry, but Quasar doesn't yet have that feature.");
-		}
+	else if (command === "banesti") {
+		message.channel.send("**Esteriore** is no longer in the server.");
 	}
 
 	//Echo
