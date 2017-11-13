@@ -1,18 +1,9 @@
-exports.run = (client, message, args) => {
+exports.run = (client, message, args, config) => {
 	const request = require("request");
-	const config = require("../config.json");
 
-	let format = "``" + config.prefix + "shard <TARGET TYPE> <SHARD> <TARGET>";
+	if (!args || args.length < 3) return message.channel.send("One or more arguments were missing.");
 
 	let [type, shard, ...target] = args;
-
-	if (type === "help") {
-		message.channel.send("This will return the specified shard from the specified nation.\n" + format);
-		return;		
-	} else if (type == null || shard == null || target == null) {
-		message.channel.send("One or more arguments were missing. Try running ``" + config.prefix + "shard help``.");
-		return;
-	}
 
 	let targetURL = `https://www.nationstates.net/cgi-bin/api.cgi?${type}=${target.join(" ")}&q=${shard}`;
 	request({

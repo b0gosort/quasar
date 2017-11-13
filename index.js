@@ -23,7 +23,7 @@ client.on("message", (message) => {
 	if (commandFiles.indexOf(command + ".js") === -1) return message.channel.send("The command ``" + command + "`` does not exist.");
 	try {
 		let commandFile = require(`./commands/${command}.js`);
-		commandFile.run(client, message, args);
+		commandFile.run(client, message, args, config);
 	} catch (err) {
 		console.error(err);
 	}
