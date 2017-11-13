@@ -7,7 +7,7 @@ exports.run = (client, message, args, config) => {
 
 	let target = message.mentions.members.first();
 	let reason = args.slice(1).join(" ");
-	target.ban(reason);
 
-	message.channel.send(`**${target.user.username}** was banned from the server.`);
+	target.send(`You were banned from **${message.guild}** by **${message.author.username}** for:\n*${reason}*`);
+	target.ban(reason);
 }

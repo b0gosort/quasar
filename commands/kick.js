@@ -5,7 +5,7 @@ exports.run = (client, message, args, config) => {
 
 	let target = message.mentions.members.first();
 	let reason = args.slice(1).join(" ");
-	target.kick(reason);
 
-	message.channel.send(`**${target.user.username}** was kicked from the server.`);
+	target.send(`You were kicked, but not banned, from **${message.guild}** by **${message.author.username}** for:\n*${reason}*`);
+	target.kick(reason);
 }
