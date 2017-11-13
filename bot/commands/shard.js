@@ -7,7 +7,7 @@ exports.run = (client, message, args) => {
 		message.channel.send("This will return the specified shard from the specified nation.\n" + format);
 		return;		
 	} else if (type == null || shard == null || target == null) {
-		message.channel.send("One or more arguments were missing. Try running ``" + config.prefix + "shard help");
+		message.channel.send("One or more arguments were missing. Try running ``" + config.prefix + "shard help``.");
 		return;
 	}
 
