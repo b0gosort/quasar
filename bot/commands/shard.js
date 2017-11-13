@@ -1,4 +1,6 @@
 exports.run = (client, message, args) => {
+	const config = require("../config.json");
+
 	let format = "``" + config.prefix + "shard <TARGET TYPE> <SHARD> <TARGET>";
 
 	let [type, shard, ...target] = args;
