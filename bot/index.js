@@ -36,13 +36,14 @@ client.on("message", (message) => {
 
 	//Shard
 	else if (command === "shard") {
+		let format = "``" + config.prefix + "shard <TARGET TYPE> <SHARD> <TARGET>``";
 		let [type, shard, ...target] = args;
 
 		if (type === "help") {
-			message.channel.send("Returns the specified shard from the specified nation or region.\n``q.shard <TYPE> <SHARD> <TARGET>``");
+			message.channel.send("Returns the specified shard from the specified nation or region.\n" + format);
 			return;
 		} else if (type == null || shard == null || target == null) {
-			message.channel.send("One or more arguments missing from\n``q.shard <TYPE> <SHARD> <TARGET>``");
+			message.channel.send("One or more arguments missing.\n" + format);
 			return;
 		}
 
