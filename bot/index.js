@@ -34,11 +34,19 @@ client.on("message", (message) => {
 		message.channel.send(text);
 	}
 
-	//Nation
-	else if (command === "nation") {
-		let target = args.slice(0).join(" ").replace(/ /g, "_").toLowerCase();
-		if (target == null) return;
-		let targetURL = `https://www.nationstates.net/cgi-bin/api.cgi?nation=${target}&q=wa`;
+	//Shard
+	else if (command === "shard") {
+		let [type, shard, ...target] = args;
+
+		if (type === "help") {
+			message.channel.send("Returns the specified shard from the specified nation or region.\n``q.shard <TYPE> <SHARD> <TARGET>``");
+			return;
+		} else if (type == null || shard == null || target == null) {
+			message.channel.send("One or more arguments missing from\n``q.shard <TYPE> <SHARD> <TARGET>``");
+			return;
+		}
+
+		let targetURL = `https://www.nationstates.net/cgi-bin/api.cgi?${type}=${target.join(" ")}&q=${shard}`;
 		request({
 			url: targetURL,
 			headers: {"User-Agent": "Quasar Discord Bot by Solborg"}
@@ -46,7 +54,8 @@ client.on("message", (message) => {
 			console.log("Made request to: " + targetURL);
 			console.log("Error: " + error);
 			console.log("Status code: " + response);
-			message.channel.send("``" + body + "``");
+
+			message.channel.send("```xml\n" + body + "\n```");
 		});
 	}
 });
