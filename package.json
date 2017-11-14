@@ -19,6 +19,7 @@
   "homepage": "https://github.com/b0gosort/quasar#readme",
   "dependencies": {
     "discord.js": "^11.2.1",
+    "elementtree": "^0.1.7",
     "request": "^2.83.0"
   }
 }
