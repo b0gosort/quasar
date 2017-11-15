@@ -62,10 +62,9 @@ exports.run = (client, message, args, config) => {
 		directory += "```";
 
 		message.author.send(directory).then(function() {
-			return message.channel.send("A list of commands was delivered to your Direct Messages.");
+			return message.channel.send("A list of commands was delivered to your direct messages.");
 		}).catch(function(error) {
-			console.log(error);
-			return message.channel.send("The list of commands could not be delivered to you. Make sure you have Direct Messages enabled.");
+			return message.channel.send("The list of commands could not be delivered to you. Make sure you have direct messages enabled.");
 		});
 	} else {
 		if (commandList.indexOf(args[0]) === -1) return message.channel.send(`The command **${args[0]}** does not exist`);

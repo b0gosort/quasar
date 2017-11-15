@@ -6,6 +6,10 @@ exports.run = (client, message, args, config) => {
 	let target = message.mentions.members.first();
 	let reason = args.slice(1).join(" ");
 
-	target.send(`You were kicked, but not banned, from **${message.guild}** by **${message.author.username}** for:\n*${reason}*`);
-	target.kick(reason);
+	target.send(`You were kicked, but not banned, from **${message.guild}** by **${message.author.username}** for:\n*${reason}*`).then(function() {
+		return target.kick(reason);
+	}).catch(function(error) {
+		message.channel.send("The kick reason could not be delivered via direct message.");
+		return target.kick(reason);
+	});
 }
