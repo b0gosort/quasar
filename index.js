@@ -24,7 +24,7 @@ client.on("message", (message) => {
 	const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 	const command = args.shift().toLowerCase();
 
-	if (commandFiles.indexOf(command + ".js") === -1) return message.channel.send("The command ``" + command + "`` does not exist.");
+	if (commandFiles.indexOf(command + ".js") === -1) return message.channel.send(`The command **${command}** does not exist.`);
 	try {
 		let commandFile = require(`./commands/${command}.js`);
 		commandFile.run(client, message, args, config);
