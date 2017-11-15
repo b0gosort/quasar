@@ -5,6 +5,6 @@ exports.run = (client, message, args, config) => {
 
 	let command = args[0];
 	delete require.cache[require.resolve(`./${command}.js`)];
-	message.channel.send("The command ``" + command + "`` has been reloaded.");
+	message.channel.send(`The command **${command}** has been reloaded.`);
 	console.log(`Reloaded the command ${command}`);
 }
