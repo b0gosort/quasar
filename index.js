@@ -11,7 +11,7 @@ client.on("ready", () => {
 });
 
 client.on("guildMemberAdd", (member) => {
-	member.guild.channels.get(config.joinLog).send(`**${member.user.username}** has joined the server.`);
+	member.guild.channels.get(config.joinLog).send(`Welcome, ${member.user.toString()}. To be assigned a role, please run:\n` + "```.register <YOUR NATION NAME>```");
 });
 
 client.on("guildMemberRemove", (member) => {
