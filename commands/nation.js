@@ -10,14 +10,14 @@ exports.run = (client, message, args, config) => {
 	request({
 		url: targetURL,
 		headers: {"User-Agent": "Quasar Discord Bot by Solborg"}
-	}, function (error, response, body) {
+	}, function(error, response, body) {
 		console.log("Made request to: " + targetURL);
 		console.log("Error: " + error);
 		console.log("Status code: " + response);
 
 		if (body.indexOf("Error") !== -1) return message.channel.send("There was an error with your request.");
 
-		parseString(body, function (error, result) {
+		parseString(body, function(error, result) {
 			console.log("Parse error: " + error);
 
 			let data = result.NATION;
