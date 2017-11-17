@@ -20,6 +20,10 @@ exports.run = (client, message, args, config) => {
 			desc: "kicks the specified member, admin-only",
 			syntax: "kick <TARGET MEMBER> [REASON]"
 		},
+		mute: {
+			desc: "mutes the specified member in the current channel",
+			syntax: "mute [ENABLE OR DISABLE] <TARGET MEMBER>"
+		},
 		nation: {
 			desc: "returns an overview of the specified NS nation",
 			syntax: "nation <NATION NAME>"
