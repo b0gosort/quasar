@@ -12,7 +12,7 @@ exports.run = function(client, message, args, config) {
 			return message.channel.send(`**${target.user.username}** is no longer muted in ${message.channel.toString()}.`);
 		}).catch(function(error) {
 			console.log(error);
-			return message.channel.send("There was an error when attempting to mute that member.");
+			return message.channel.send("There was an error when attempting to unmute that member.");
 		});
 	} else {
 		message.channel.overwritePermissions(target, {
