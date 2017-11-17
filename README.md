@@ -8,7 +8,10 @@ This bot runs with Node.js and requires a `config.json` file. Here is a template
 {
 	"token": "YOUR BOT USER TOKEN",
 	"prefix": "COMMAND PREFIX",
-	"ownerID": "USER ID OF ADMIN",
+	"admins": [
+		"USER ID OF PRIMARY ADMIN",
+		"USER ID OF ANOTHER ADMIN"
+	],
 	"joinLog": "CHANNEL ID FOR JOIN/LEAVE MESSAGES",
 	"region": "your_ns_region",
 	"roles": {

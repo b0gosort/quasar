@@ -3,7 +3,7 @@ exports.run = (client, message, args, config) => {
 
 	if (args[0] === "esti") return message.channel.send("**Esteriore** is no longer in the server.");
 
-	if (message.author.id !== config.ownerID) return message.channel.send("You don't have permission to ban that member.");
+	if (config.admins.indexOf(message.author.id) === -1) return message.channel.send("You don't have permission to ban that member.");
 
 	let target = message.mentions.members.first();
 	let reason = args.slice(1).join(" ");

@@ -30,7 +30,7 @@ exports.run = (client, message, args, config) => {
 				let foreignRole = message.guild.roles.find("name", config.roles.foreign);
 
 				message.member.addRole(foreignRole).catch(console.error);
-				client.users.get(config.ownerID).send(`**${target.username}** was assigned the role **${config.roles.foreign}** with the nation **${nation}**.`);
+				client.users.get(config.admins[0]).send(`**${target.username}** was assigned the role **${config.roles.foreign}** with the nation **${nation}**.`);
 				message.channel.send(`You have been assigned the role **${config.roles.foreign}**. If you are here as a diplomat, please send a message to a government member.`);
 			} else if (data.UNSTATUS[0] === "WA Member") {
 				//For WA members in the region
@@ -38,7 +38,7 @@ exports.run = (client, message, args, config) => {
 				let citizenRole = message.guild.roles.find("name", config.roles.citizen);
 
 				message.member.addRole(citizenRole).catch(console.error);
-				client.users.get(config.ownerID).send(`**${target.username}** was assigned the role **${config.roles.citizen}** with the nation **${nation}**.`);
+				client.users.get(config.admins[0]).send(`**${target.username}** was assigned the role **${config.roles.citizen}** with the nation **${nation}**.`);
 				message.channel.send(`You have been assigned the role **${config.roles.citizen}**. Please endorse the WA Delegate if you haven't already.`);
 			} else {
 				//For non-WA members in the region
