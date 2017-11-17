@@ -25,7 +25,7 @@ exports.run = (client, message, args, config) => {
 			syntax: "nation <NATION NAME>"
 		},
 		ping: {
-			desc: "returns a response",
+			desc: "pings the user back",
 			syntax: "ping"
 		},
 		region: {
@@ -33,7 +33,7 @@ exports.run = (client, message, args, config) => {
 			syntax: "region <REGION NAME>"
 		},
 		register: {
-			desc: "assigns an appropriate role to the user, given their nation",
+			desc: "assigns an appropriate role and nickname to the user, given their nation",
 			syntax: "register <NATION NAME>"
 		},
 		reload: {
