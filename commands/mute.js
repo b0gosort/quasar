@@ -9,7 +9,7 @@ exports.run = function(client, message, args, config) {
 		"SEND_MESSAGES": false,
 		"ATTACH_FILES": false
 	}).then(function() {
-		return message.channel.send(`**${target.user.username}** is now muted.`);
+		return message.channel.send(`**${target.user.username}** is now muted in ${message.channel.toString()}.`);
 	}).catch(function(error) {
 		console.log(error);
 		return message.channel.send("There was an error when attempting to mute that member.");
