@@ -1,5 +1,5 @@
 exports.run = (client, message, args, config) => {
-	if (config.admins.indexOf(message.author.id) === -1) return message.channel.send("You don't have permission to use **reload**.");
+	if (config.admins.indexOf(message.author.id) === -1) return message.channel.send("You don't have permission to use the command **reload**.");
 
 	if (!args || args.length < 1) return message.channel.send("One or more arguments were missing.");
 
