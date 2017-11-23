@@ -1,6 +1,4 @@
-exports.run = (client, message, [target, ...reason], config) => {
-	if (config.admins.indexOf(message.author.id) === -1) return message.channel.send("You don't have permission to use the command **kick**.");
-
+exports.run = (client, message, [target, ...reason]) => {
 	if (!target || !reason) return message.channel.send("One or more arguments were missing.");
 
 	let toKick = message.mentions.members.first();
@@ -18,5 +16,6 @@ exports.run = (client, message, [target, ...reason], config) => {
 exports.info = {
 	name: "kick",
 	desc: "kicks the specified member, admin-only",
-	syntax: "kick <TARGET MEMBER> [REASON]"
+	syntax: "kick <TARGET MEMBER> [REASON]",
+	admin: true
 };

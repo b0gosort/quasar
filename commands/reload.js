@@ -1,6 +1,4 @@
-exports.run = (client, message, args, config) => {
-	if (config.admins.indexOf(message.author.id) === -1) return message.channel.send("You don't have permission to use the command **reload**.");
-
+exports.run = (client, message, args) => {
 	if (!args.length) return message.channel.send("One or more arguments were missing.");
 
 	let command = args[0];
@@ -17,5 +15,6 @@ exports.run = (client, message, args, config) => {
 exports.info = {
 	name: "reload",
 	desc: "reloads the specified command, admin-only",
-	syntax: "reload <COMMAND NAME>"
+	syntax: "reload <COMMAND NAME>",
+	admin: true
 };

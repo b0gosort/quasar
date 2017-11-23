@@ -1,9 +1,9 @@
-exports.run = (client, message, [target, ...reason], config) => {
+exports.run = (client, message, [target, ...reason]) => {
 	if (!target) return message.channel.send("One or more arguments were missing.");
 
 	if (target === "esti") return message.channel.send("**Esteriore** is no longer in the server.");
 
-	if (config.admins.indexOf(message.author.id) === -1) return message.channel.send("You don't have permission to ban that member.");
+	if (!client.admins.has(message.author.id)) return message.channel.send("You don't have permission to ban that member.");
 
 	target = message.mentions.members.first();
 

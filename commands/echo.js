@@ -1,7 +1,5 @@
 const { cleanContent } = require("../functions");
-exports.run = (client, message, args, config) => {
-	if (config.admins.indexOf(message.author.id) === -1) return message.channel.send("You don't have permission to use the command **echo**.");
-
+exports.run = (client, message, args) => {
 	if (!args.length) return message.channel.send("One or more arguments were missing.");
 
 	const text = args.join(" ");
@@ -12,5 +10,6 @@ exports.run = (client, message, args, config) => {
 exports.info = {
 	name: "echo",
 	desc: "repeats the specified text and deletes the original, admin-only",
-	syntax: "echo <TEXT>"
+	syntax: "echo <TEXT>",
+	admin: true
 };
