@@ -7,7 +7,7 @@ exports.run = (client, message, args) => { // eslint-disable-line consistent-ret
 		message.author.send(stripIndents`
 			**Quasar Discord Bot** by Solborg
 			\`\`\`
-      ${client.commands.map(command => `${command.name}: ${command.desc}`).join("\n")}
+      ${client.commands.map(command => `${command.info.name}: ${command.info.desc}`).join("\n")}
 			\`\`\`
 		`).then(() => { // eslint-disable-line
 			return message.channel.send("A list of commands was delivered to your direct messages.");
@@ -18,9 +18,9 @@ exports.run = (client, message, args) => { // eslint-disable-line consistent-ret
 		if (!client.commands.has(args[0])) return message.reply(`The command ${args[0]} does not exist.`);
 		let command = client.commands.get(args[0]);
 		return message.channel.send(stripIndents`
-			${command.name}: ${command.desc}
+			${command.info.name}: ${command.info.desc}
 			\`\`\`
-      ${command.syntax}
+      ${command.info.syntax}
 			\`\`\`
 		`);
 	}

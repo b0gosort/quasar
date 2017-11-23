@@ -3,17 +3,11 @@ const client = new Client({ disableEveryone: true });
 client.commands = new Collection();
 const fs = require("fs");
 const { stripIndents } = require("common-tags");
+const { loadCommands } = require("./functions");
 
 const config = require("./config.json");
 
-fs.readdir(`${__dirname}/commands/`, (err, files) => {
-	if (err) throw err;
-	files.forEach(file => {
-		let { info } = require(`./commands/${file}`);
-		if (!info) return;
-		client.commands.set(info.name, info);
-	});
-});
+loadCommands(client);
 client.on("ready", () => {
 	console.log("Quasar is ready!");
 });
@@ -39,8 +33,8 @@ client.on("message", message => {
 		return message.channel.send(`The command **${command}** does not exist.`); // eslint-disable-line consistent-return
 	}
 	try {
-		let commandFile = require(`./commands/${command}.js`);
-		commandFile.run(client, message, args, config);
+		let Command = client.commands.get(command);
+		Command.run(client, message, args, config);
 	} catch (err) {
 		// Let the user know the command errored
 		message.reply(`an error occurred, which you shouldn't ever receive: \`${err.message}\`. Please contact the bot developer.`);
