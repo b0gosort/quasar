@@ -73,8 +73,8 @@ client.on("message", message => {
 
 client.login(token);
 
-process.on("unhandledRejection", async (err, promise) => {
-	console.error(`Unhandled promise rejection at ${await promise}: ${err.stack}`);
+process.on("unhandledRejection", (err, promise) => {
+	console.error(`Unhandled promise rejection at ${promise}: ${err.stack}`);
 });
 
 process.on("unhandledException", err => {
