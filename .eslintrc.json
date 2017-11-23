@@ -1,0 +1,25 @@
+{
+  "extends": "aqua",
+  "parserOptions": {
+    "ecmaVersion": 2017
+  },
+  "rules": {
+    "quotes": [
+      "warn",
+      "double",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    "max-len": [
+      "warn",
+      150
+    ],
+    "eol-last": 0,
+    "no-console": "off",
+    "no-extra-parens": 2,
+    "semi-style": ["error", "last"],
+    "arrow-parens": "off"
+  }
+}
