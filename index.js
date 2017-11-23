@@ -9,10 +9,8 @@ const config = require("./config.json");
 
 loadCommands(client);
 
-let prefix;
 client.on("ready", () => {
 	console.log("Quasar is ready!");
-	prefix = new RegExp(`^(<@!?${client.user.id}>|${config.prefix}?)`, "i");
 });
 
 client.on("guildMemberAdd", member => {
@@ -30,19 +28,17 @@ client.on("guildMemberRemove", member => {
 
 client.on("message", message => {
 	// Check if command starts with prefix and is not run by a bot
-	if (message.author.bot || !prefix || !prefix.test(message.content)) return;
+	if (message.author.bot || !message.guild || !message.content.startsWith(config.prefix)) return;
 
 	const [command, ...args] = message.content
 		.toLowerCase()
-		.replace(prefix, "")
+		.replace(config.prefix, "")
 		.trim()
 		.split(/ +/g);
 
 	let cmd;
 	if (client.commands.has(command)) {
 		cmd = client.commands.get(command);
-	} else {
-		return message.channel.send(`The command **${command}** does not exist.`); // eslint-disable-line consistent-return
 	}
 	if (cmd) {
 		try {
@@ -55,6 +51,8 @@ client.on("message", message => {
 			`);
 			console.error(err);
 		}
+	} else {
+		return message.channel.send(`The command **${command}** does not exist.`); // eslint-disable-line consistent-return
 	}
 });
 
