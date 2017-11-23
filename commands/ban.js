@@ -5,16 +5,18 @@ exports.run = (client, message, [target, ...reason]) => {
 
 	if (!client.admins.has(message.author.id)) return message.channel.send("You don't have permission to ban that member.");
 
-	target = message.mentions.members.first();
+	let toBan = message.mentions.members.first();
 
 	if (!reason) return target.ban();
 
-	target.send(`You were banned from **${message.guild}** by **${message.author.username}** for:\n*${reason}*`).catch(error => {
+	toBan.send(`You were banned from **${message.guild}** by **${message.author.username}** for:\n*${reason}*`).catch(error => {
 		console.log(error);
 		message.channel.send("The ban reason could not be delivered via direct message.");
 	});
 
-	return target.ban({ reason });
+	return toBan.ban({ reason })
+		.then(() => message.reply("the ban was succesfull."))
+		.catch(err => message.reply(`I failed to ban ${toBan.tag}: ${err.message}`));
 };
 
 exports.info = {

@@ -10,7 +10,9 @@ exports.run = (client, message, [target, ...reason]) => {
 		message.channel.send("The kick reason could not be delivered via direct message.");
 	});
 
-	return toKick.kick(reason);
+	return toKick.kick(reason)
+		.then(() => message.reply("the kick was succesfull."))
+		.catch(err => message.reply(`I failed to kick ${toKick.tag}: ${err.message}`));
 };
 
 exports.info = {
