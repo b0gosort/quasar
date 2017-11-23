@@ -50,4 +50,7 @@ const cleanContent = (msg, str) => { // eslint-disable-line
 		});
 };
 
-module.exports = { loadCommands, cleanContent };
+module.exports = {
+	loadCommands,
+	cleanContent
+};
