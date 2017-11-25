@@ -13,5 +13,7 @@ exports.info = {
 	name: "clear",
 	desc: "clears the specified number of recent messages, admin-only",
 	syntax: "clear <NUMBER OF MESSAGES>",
-	admin: true
+	admin: true,
+	args: true,
+	argsLength: 1
 };

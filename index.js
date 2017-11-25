@@ -54,8 +54,21 @@ client.on("message", message => {
 		cmd = client.commands.get(command);
 	}
 	if (cmd) {
+		// Check if the person who ran the command, is an admin
 		if (cmd.info.admin && !client.admins.has(message.author.id)) return message.reply("you do not have permissions to run this command.");
+
+		// Check if there were provided enough arguments
+		if (cmd.info.args && !args[cmd.info.argsLength - 1]) {
+			let commandReply = `one or more arguments were missing.`;
+			if (cmd.info.syntax) {
+				commandReply += `\nThe proper usage for this command is: \`${prefix}${cmd.info.syntax}\``;
+			}
+
+			// Reply with the error message
+			return message.reply(commandReply);
+		}
 		try {
+			// Run the command
 			cmd.run(client, message, args);
 		} catch (err) {
 			// Let the user know the command errored
@@ -71,7 +84,12 @@ client.on("message", message => {
 	return null;
 });
 
-client.login(token);
+client.login(token)
+	.then(() => console.info(`Logged in successfully as ${client.user.tag}!`))
+	.catch(err => {
+		console.error(`Failed to login: ${err.stack}`);
+		process.exit(1);
+	});
 
 process.on("unhandledRejection", (err, promise) => {
 	console.error(`Unhandled promise rejection at ${promise}: ${err.stack}`);

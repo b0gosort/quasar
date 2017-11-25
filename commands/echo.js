@@ -11,5 +11,7 @@ exports.info = {
 	name: "echo",
 	desc: "repeats the specified text and deletes the original, admin-only",
 	syntax: "echo <TEXT>",
-	admin: true
+	admin: true,
+	args: true,
+	argsLength: 1
 };

@@ -16,5 +16,7 @@ exports.info = {
 	name: "reload",
 	desc: "reloads the specified command, admin-only",
 	syntax: "reload <COMMAND NAME>",
-	admin: true
+	admin: true,
+	args: true,
+	argsLength: 1
 };

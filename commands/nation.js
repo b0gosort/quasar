@@ -49,5 +49,7 @@ exports.run = (client, message, args) => { // eslint-disable-line consistent-ret
 exports.info = {
 	name: "nation",
 	desc: "returns an overview of the specified NS nation",
-	syntax: "nation <NATION NAME>"
+	syntax: "nation <NATION NAME>",
+	args: true,
+	argsLength: 1
 };

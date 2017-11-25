@@ -22,5 +22,7 @@ exports.run = (client, message, [target, ...reason]) => {
 exports.info = {
 	name: "ban",
 	desc: "bans the specified member, admin-only",
-	syntax: "ban <TARGET MEMBER> [REASON]"
+	syntax: "ban <TARGET MEMBER> [REASON]",
+	args: true,
+	argsLength: 1
 };
