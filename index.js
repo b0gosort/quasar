@@ -84,6 +84,10 @@ client.on("message", message => {
 	return null;
 });
 
+client.on("error", console.error);
+
+client.on("warn", console.warn);
+
 client.login(token)
 	.then(() => console.info(`Logged in successfully as ${client.user.tag}!`))
 	.catch(err => {
