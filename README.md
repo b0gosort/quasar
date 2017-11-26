@@ -2,24 +2,14 @@
 
 ## A Discord bot for NationStates regions by Solborg
 
-This bot runs with Node.js and requires a `config.json` file. Here is a template:
+This bot runs with Node.js.
 
-```json
-{
-	"token": "YOUR BOT USER TOKEN",
-	"prefix": "COMMAND PREFIX",
-	"admins": [
-		"USER ID OF PRIMARY ADMIN",
-		"USER ID OF ANOTHER ADMIN"
-	],
-	"joinLog": "CHANNEL ID FOR JOIN/LEAVE MESSAGES",
-	"region": "your_ns_region",
-	"roles": {
-		"citizen": "CITIZEN ROLE NAME",
-		"foreign": "GUEST ROLE NAME"
-	}
-}
-```
+## Setup
+1. Run `npm install` in the console to install all required dependencies.
+2. Edit the `config.example.json` file with all necessarily information, and rename the file to `config.json`.
+3. Run `npm start` in the console, which will start the bot.
+
+## Commands
 
 Here is a list of current commands:
 
