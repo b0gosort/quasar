@@ -25,7 +25,7 @@ exports.run = (client, message, args) => { // eslint-disable-line consistent-ret
 exports.info = {
 	name: "mute",
 	desc: "mutes the specified member in the current channel",
-	syntax: "mute [ENABLE OR DISABLE] <TARGET MEMBER>",
+	syntax: "mute [ENABLE OR DISABLE] <...TARGET MEMBER>",
 	admin: true,
 	args: true,
 	argsLength: 1

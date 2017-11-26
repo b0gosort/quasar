@@ -15,7 +15,7 @@ exports.run = (client, message, args) => {
 exports.info = {
 	name: "reload",
 	desc: "reloads the specified command, admin-only",
-	syntax: "reload <COMMAND NAME>",
+	syntax: "reload <...COMMAND NAME>",
 	admin: true,
 	args: true,
 	argsLength: 1

@@ -10,7 +10,7 @@ exports.run = (client, message, args) => {
 exports.info = {
 	name: "echo",
 	desc: "repeats the specified text and deletes the original, admin-only",
-	syntax: "echo <TEXT>",
+	syntax: "echo <...TEXT>",
 	admin: true,
 	args: true,
 	argsLength: 1

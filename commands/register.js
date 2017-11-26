@@ -54,7 +54,7 @@ exports.run = (client, message, args, config) => { // eslint-disable-line
 exports.info = {
 	name: "register",
 	desc: "assigns an appropriate role and nickname to the user, given their nation",
-	syntax: "register <NATION NAME>",
+	syntax: "register <...NATION NAME>",
 	args: true,
 	argsLength: 1
 };

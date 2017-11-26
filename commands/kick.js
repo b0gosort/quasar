@@ -18,7 +18,7 @@ exports.run = (client, message, [target, ...reason]) => {
 exports.info = {
 	name: "kick",
 	desc: "kicks the specified member, admin-only",
-	syntax: "kick <TARGET MEMBER> [REASON]",
+	syntax: "kick <TARGET MEMBER> [...REASON]",
 	admin: true,
 	args: true,
 	argsLength: 1

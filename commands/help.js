@@ -29,5 +29,5 @@ exports.run = (client, message, args) => { // eslint-disable-line consistent-ret
 exports.info = {
 	name: "help",
 	desc: "returns a list of commands or the syntax for a specific command",
-	syntax: "help [COMMAND NAME]"
+	syntax: "help [...COMMAND NAME]"
 };

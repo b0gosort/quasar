@@ -21,7 +21,7 @@ exports.run = (client, message, args) => {
 exports.info = {
 	name: "shard",
 	desc: "returns the specified shard info for the specified nation or region",
-	syntax: "shard <TARGET TYPE> <SHARD> <TARGET NATION OR REGION>",
+	syntax: "shard <TARGET TYPE> <SHARD> <...TARGET NATION OR REGION>",
 	args: true,
 	argsLength: 3
 };

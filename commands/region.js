@@ -83,7 +83,7 @@ exports.run = (client, message, args) => { // eslint-disable-line
 exports.info = {
 	name: "region",
 	desc: "returns an overview of the specified NS region",
-	syntax: "region <REGION NAME>",
+	syntax: "region <...REGION NAME>",
 	args: true,
 	argsLength: 1
 };
