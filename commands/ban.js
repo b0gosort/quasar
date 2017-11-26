@@ -10,11 +10,11 @@ exports.run = (client, message, [target, ...reason]) => {
 	if (!reason) return target.ban();
 
 	toBan.send(`You were banned from **${message.guild}** by **${message.author.username}** for:\n*${reason}*`).catch(error => {
-		console.log(error);
+		console.error(error);
 		message.channel.send("The ban reason could not be delivered via direct message.");
 	});
 
-	return toBan.ban({ reason })
+	return toBan.ban({ reason: reason.join(" ") })
 		.then(() => message.reply("the ban was succesfull."))
 		.catch(err => message.reply(`I failed to ban ${toBan.tag}: ${err.message}`));
 };
