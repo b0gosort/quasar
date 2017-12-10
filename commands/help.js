@@ -11,7 +11,7 @@ exports.run = function(client, message, args, config) {
 		define: {
 			desc: "returns the definition(s) of the specified word",
 			syntax: "define <WORD>"
-		}
+		},
 		echo: {
 			desc: "repeats the specified text and deletes the original, admin-only",
 			syntax: "echo <TEXT>"
