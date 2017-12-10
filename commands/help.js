@@ -1,4 +1,4 @@
-exports.run = (client, message, args, config) => {
+exports.run = function(client, message, args, config)> {
 	let commands = {
 		ban: {
 			desc: "bans the specified member, admin-only",
