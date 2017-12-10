@@ -7,7 +7,7 @@ exports.run = (client, message, args, config) => {
 	if (message.member.roles.some(r => [config.roles.citizen, config.roles.foreign].includes(r.name))) return message.channel.send("You already have a role.");
 
 	let target = message.author;
-	let nation = args.join("_").toLowerCase();
+	let nation = args.join("_").toLowerCase().replace("<", "").replace(">", "");
 	let nationURL = `https://www.nationstates.net/cgi-bin/api.cgi?nation=${nation}&q=wa+region+name`;
 
 	request({
