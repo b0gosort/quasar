@@ -8,6 +8,10 @@ exports.run = function(client, message, args, config)> {
 			desc: "clears the specified number of recent messages, admin-only",
 			syntax: "clear <NUMBER OF MESSAGES>"
 		},
+		define: {
+			desc: "returns the definition(s) of the specified word",
+			syntax: "define <WORD>"
+		}
 		echo: {
 			desc: "repeats the specified text and deletes the original, admin-only",
 			syntax: "echo <TEXT>"
@@ -47,6 +51,10 @@ exports.run = function(client, message, args, config)> {
 		shard: {
 			desc: "returns the specified shard info for the specified nation or region",
 			syntax: "shard <TARGET TYPE> <SHARD> <TARGET NATION OR REGION>"
+		}
+		version: {
+			desc: "returns the version of Quasar that is running",
+			syntax: "version"
 		}
 	};
 
