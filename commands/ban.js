@@ -24,5 +24,6 @@ exports.info = {
 	desc: "bans the specified member, admin-only",
 	syntax: "ban <TARGET MEMBER> [...REASON]",
 	args: true,
-	argsLength: 1
+	argsLength: 1,
+	admin: true
 };
