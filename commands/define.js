@@ -16,7 +16,7 @@ exports.run = function(client, message, args, config) {
 
 		let data = JSON.parse(body);
 		
-		if (data.success == null || data.success === true) {
+		if ((data.success == null || data.success === true) && data.results != null) {
 			let output = `Definitions for **${word}**\n`;
 			data.results.forEach(function(entry, index) {
 				output += `\n${index + 1}) ${entry.partOfSpeech}: *${entry.definition}*`
