@@ -1,6 +1,6 @@
 {
   "name": "quasar",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "A bot for Discord servers tailored for NationStates regions",
   "main": "index.js",
   "scripts": {
