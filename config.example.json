@@ -1,5 +1,6 @@
 {
 	"token": "YOUR BOT USER TOKEN",
+	"mashapeKey": "MASHAPE API KEY FOR WORDSAPI",
 	"prefix": "COMMAND PREFIX",
 	"admins": [
 		"USER ID OF PRIMARY ADMIN",

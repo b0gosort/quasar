@@ -96,10 +96,10 @@ client.login(token)
 	});
 
 process.on("unhandledRejection", (err, promise) => {
-	console.error(`Unhandled promise rejection at ${promise}: ${err.stack}`);
+	console.error(`Unhandled promise rejection`, err, "\n", promise);
 });
 
 process.on("unhandledException", err => {
-	console.error(`Unhandled exception: ${err.stack}`);
+	console.error(`Unhandled exception`, err);
 	process.exit(1);
 });
