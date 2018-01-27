@@ -1,17 +1,32 @@
-exports.run = function(client, message, args, config) {
-	if (config.admins.indexOf(message.author.id) === -1) return message.channel.send("You don't have permission to use the command **kick**.");
+const { Command } = require("../structures");
 
-	if (!args || args.length < 1) return message.channel.send("One or more arguments were missing.");
-
-	let target = message.mentions.members.first();
-	let reason = args.slice(1).join(" ");
-
-	if (reason === "" || reason === " ") return target.kick();
-
-	target.send(`You were kicked, but not banned, from **${message.guild}** by **${message.author.username}** for:\n*${reason}*`).catch(function(error) {
-		console.log(error);
-		message.channel.send("The kick reason could not be delivered via direct message.");
-	});
-
-	return target.kick(reason);
-}
+module.exports = class KickCommand extends Command {
+  constructor(client) {
+    super(client, {
+      name: "kick",
+      description: "Kicks the specified member.",
+      syntax: "kick <MEMBER> [...REASON]",
+      args: 1,
+      admin: true,
+      guildOnly: true
+    });
+  }
+  async run(message, [member, ...reason]) {
+    const toBan = message.mentions.members.first() || message.guild.members.get(member);
+    if (!toBan) return message.reply(`you must provide a user to kick.`);
+    if (!toBan.kickable || this.client.isAdmin(toBan)) return message.reply(`I cannot ban that user.`);
+    try {
+      await toBan.send(`
+You have been kicked from ${message.guild.name} for the following reason:
+\`${reason.join(" ") || "No reason provided"}\`.
+      `).catch(() => null);
+      await toBan.kick({ days: 1, reason: reason.join(" ") || "No reason provided" });
+      return message.channel.send(`
+${message.author}, I successfully kicked ${toBan.user.tag}: \`${reason.join(" ") || "No reason specified"}\`
+      `);
+    } catch (err) {
+      console.error(err);
+      return message.channel.send(`${message.author}, I failed to kick ${toBan.user.tag}: \`${err.message}\``);
+    }
+  }
+};

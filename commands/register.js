@@ -1,4 +1,4 @@
-exports.run = function(client, message, args, config) {
+exports.run = function reee(client, message, args, config) {
 	const request = require("request");
 	const parseString = require("xml2js").parseString;
 
@@ -13,14 +13,14 @@ exports.run = function(client, message, args, config) {
 	request({
 		url: nationURL,
 		headers: {"User-Agent": "Quasar Discord Bot by Solborg"}
-	}, function(error, response, body) {
+	}, function reeeeee(error, response, body) {
 		console.log("Made request to: " + nationURL);
 		console.log("Error: " + error);
 		console.log("Status code: " + response);
 
 		if (body.indexOf("Error") !== -1) return message.channel.send("There was an error with getting information about that nation. Make sure not to include the nation pretitle.");
 
-		parseString(body, function(error, result) {
+		parseString(body, function re(error, result) {
 			console.log("Parse error: " + error);
 
 			let data = result.NATION;
@@ -50,3 +50,14 @@ exports.run = function(client, message, args, config) {
 		});
 	});
 }
+
+const { Command } = require("../src");
+
+module.exports = class RegisterCommand extends Command {
+  constructor(client) {
+    super(client, {
+      name: "register",
+      description: "register your nation"
+    });
+  }
+};

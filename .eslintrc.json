@@ -105,7 +105,7 @@
 		"func-call-spacing": ["error", "never"],
 		"func-names": "error",
 		"func-style": ["error", "declaration", { "allowArrowFunctions": true }],
-		"id-length": ["error", { "exceptions": ["i", "j", "t", "a", "b", "c", "x", "$"] }],
+		"id-length": ["error", { "exceptions": ["i", "j", "t", "a", "b", "c", "x", "$", "m"] }],
 		"indent": ["error", 2, { "SwitchCase": 1 }],
 		"key-spacing": "error",
 		"keyword-spacing": ["error", {
