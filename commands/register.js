@@ -1,4 +1,4 @@
-const { Command } = require("../src");
+const { Command } = require("../structures");
 const config = require("../config.json");
 
 module.exports = class RegisterCommand extends Command {
@@ -36,7 +36,7 @@ You have been assigned the role **${config.roles.foreign}**. If you are here as 
 
         const citizenRole = msg.guild.roles.find("name", config.roles.citizen);
 
-        msg.member.addRole(citizenRole).catch(console.error);
+        await msg.member.addRole(citizenRole);
         for (const admin of Object.values(this.client.admins)) {
           this.client.users.get(admin)
             .send(`**${msg.author.username}** was assigned the role **${config.roles.foreign}** with the nation **${nation}**.`);

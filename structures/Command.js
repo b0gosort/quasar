@@ -74,7 +74,8 @@ class QuasarCommand {
    */
   validateInfo(info) {
     if (typeof info !== "object") throw new TypeError("Info must be an object");
-    if (typeof info.name !== "string") throw new TypeError("Command name must be a string");
+    if (typeof info.name !== "string"
+      || info.name !== info.name.toLowerCase()) throw new TypeError("Command name must be a lowercase string");
     if (typeof info.description !== "string") throw new TypeError("Command description must be a string");
     if (info.syntax && typeof info.syntax !== "string") throw new TypeError("Command syntax must be a string");
     if (info.admin && typeof info.admin !== "boolean") throw new TypeError("Admin property must be a boolean");

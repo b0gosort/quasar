@@ -1,6 +1,7 @@
 const { Client, Collection } = require("discord.js");
 const snekfetch = require("snekfetch");
 const parseString = require("util").promisify(require("xml2js").parseString);
+const Package = require("../package.json");
 
 /** @extends {Client} */
 class Quasar extends Client {
@@ -50,7 +51,7 @@ class Quasar extends Client {
     return new Promise(async (resolve, reject) => {
       if (!url.includes("nationstates")) reject(new TypeError("Request URL must be from the NationStates API"));
       try {
-        const res = await snekfetch.get(url);
+        const res = await snekfetch.get(url, { headers: { "User-Agent": `Quasar v${Package.version} by Solborg (https://github.com/b0gosort/quasar/)` } });
         if (res.status !== 200) reject(res.text.trim());
         const object = await parseString(res.text);
         resolve(object);

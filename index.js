@@ -1,6 +1,7 @@
 const fs = require("fs");
 const { joinLog, admins, token, prefix } = require("./config.json");
 const { QuasarClient } = require("./structures");
+const { oneLine, stripIndents } = require("common-tags");
 
 const client = new QuasarClient({
   disableEveryone: true,
@@ -39,14 +40,18 @@ client
     client.user.setActivity("Use .help");
     console.log(await client.generateInvite("ADMINISTRATOR"));
   })
+  .on("commandRun", (cmd, args, msg) => {
+    console.log(oneLine`Command ${cmd.name} ran in ${msg.guild ? msg.guild.name : "a DM channel"}
+      >> Arguments: ${args}
+    `);
+  })
   .on("guildMemberAdd", (member) => {
     member.guild.channels
       .get(joinLog)
-      .send(`Welcome, ${member.user}. To be assigned a role, please run:
-\`\`\`
-${prefix}register <YOUR_NATION_NAME>
-\`\`\`
-      `);
+      .send(stripIndents`Welcome, ${member.user}. To be assigned a role, please run:
+        \`\`\`
+        ${prefix}register <YOUR_NATION_NAME>
+        \`\`\``);
     member.send(`Welcome to **${member.guild.name}**. Please check the server for instructions to be assigned a role.`)
       .catch((error) => console.log(`[DISCORD] Upon sending welcome DM:`, error));
   })
@@ -79,6 +84,14 @@ ${prefix}register <YOUR_NATION_NAME>
       }
 
       try {
+        /**
+         * Emitted when a command has been run
+         * @event {commandRun}
+         * @param {QuasarCommand} command The command that has been run
+         * @param {any[]} args The command arguments
+         * @param {Message} message The command message
+         */
+        client.emit("commandRun", cmd, args, message);
         await cmd.run(message, args);
       } catch (err) {
         message.channel.send(`An error occurred while trying to run the command: \`${err.message}\`. Please contact the bot developer.`);
