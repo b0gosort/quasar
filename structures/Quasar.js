@@ -20,6 +20,18 @@ class Quasar extends Client {
      */
     this.admins = new Collection();
 
+    /**
+     * Cached nations
+     * @type {Collection<string, Object>}
+     */
+    this.nationCache = new Collection();
+
+    /**
+     * Cached regions
+     * @type {Collection<string, Object>}
+     */
+    this.regionCache = new Collection();
+
     this.once("ready", async () => {
       if (!options.admins) throw new TypeError("Must provide an array of admin IDs");
       if (!Array.isArray(options.admins)) {
@@ -31,6 +43,7 @@ class Quasar extends Client {
         this.admins.set(admin, user);
       }
     });
+    this.setInterval(this.sweepCache, 600e3);
   }
   /**
    * Checks if the given user is an admin
@@ -51,14 +64,34 @@ class Quasar extends Client {
     return new Promise(async (resolve, reject) => {
       if (!url.includes("nationstates")) reject(new TypeError("Request URL must be from the NationStates API"));
       try {
-        const res = await snekfetch.get(url, { headers: { "User-Agent": `Quasar v${Package.version} by Solborg (https://github.com/b0gosort/quasar/)` } });
+        if (this.nationCache.has(url)) resolve(this.nationCache.get(url));
+        if (this.regionCache.has(url)) resolve(this.regionCache.get(url));
+        const res = await snekfetch.get(url,
+          { headers: { "User-Agent": `Quasar v${Package.version} by Solborg (https://github.com/b0gosort/quasar/)` } });
         if (res.status !== 200) reject(res.text.trim());
         const object = await parseString(res.text);
+        if (url.includes("?nation=")) this.nationCache.set(url, object);
+        if (url.includes("?region=")) this.regionCache.set(url, object);
         resolve(object);
       } catch (err) {
         reject(err);
       }
     });
+  }
+  /**
+   * Sweeps the cache
+   * @return {boolean} If the cache sweep was successfull
+   * @private
+   */
+  sweepCache() {
+    try {
+      this.nationCache.clean();
+      this.regionCache.clean();
+      return true;
+    } catch (err) {
+      console.error("[CACHE]", err);
+      return false;
+    }
   }
 }
 
