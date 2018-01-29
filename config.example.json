@@ -1,0 +1,15 @@
+{
+  "token": "YOUR BOT USER TOKEN",
+  "mashapeKey": "MASHAPE API KEY FOR WORDSAPI",
+  "prefix": "COMMAND PREFIX",
+  "admins": [
+    "USER ID OF PRIMARY ADMIN",
+    "USER ID OF ANOTHER ADMIN"
+  ],
+  "joinLog": "CHANNEL ID FOR JOIN/LEAVE MESSAGES",
+  "region": "your_ns_region",
+  "roles": {
+    "citizen": "CITIZEN ROLE NAME",
+    "foreign": "GUEST ROLE NAME"
+  }
+}
