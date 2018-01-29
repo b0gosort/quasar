@@ -4,7 +4,9 @@
   "description": "A bot for Discord servers tailored for NationStates regions",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run lint",
+    "lint": "./node_modules/.bin/eslint index.js ./structures ./commands",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

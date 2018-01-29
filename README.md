@@ -1,43 +1,22 @@
 # Quasar
 
-## A Discord bot for NationStates regions by Solborg
+> A Discord bot for NationStates regions by Solborg
 
-This bot runs with Node.js and requires a `config.json` file. Here is a template:
+## Setup
 
-```json
-{
-	"token": "YOUR BOT USER TOKEN",
-	"mashapeKey": "MASHAPE API KEY FOR WORDSAPI",
-	"prefix": "COMMAND PREFIX",
-	"admins": [
-		"USER ID OF PRIMARY ADMIN",
-		"USER ID OF ANOTHER ADMIN"
-	],
-	"joinLog": "CHANNEL ID FOR JOIN/LEAVE MESSAGES",
-	"region": "your_ns_region",
-	"roles": {
-		"citizen": "CITIZEN ROLE NAME",
-		"foreign": "GUEST ROLE NAME"
-	}
-}
-```
+**Requirements: [Node.js](https://nodejs.org/en/) v8.0 or higher.**
 
-Here is a list of current commands:
+1. Clone the repository: `git clone https://github.com/b0gosort/quasar.git`;
+2. Install all required dependencies: `npm install`;
+3. Rename the `config.example.json` to `config.json`, and replace all info with your own info;
+4. Run the bot: `npm start`.
 
-* ban
-* clear
-* define
-* echo
-* help
-* kick
-* nation
-* ping
-* region
-* register
-* reload
-* shard
-* version
+5. **OPTIONAL**: Use [pm2](http://pm2.keymetrics.io/) to keep the bot running 24/7 on your server: `pm2 start index.js`.
 
-Command code is stored in the `commands` folder.
+## Commands
+
+You can view the commands by using the `help` command.
+
+Commands are stored in the `commands` folder.
 
 > By default, the `register` command will mask users as a citizen if they are a WA member in the region specified in the configuration file.
