@@ -12,10 +12,15 @@ module.exports = class ShardCommand extends Command {
     });
   }
   async run(msg, [type, shard, ...target]) {
+    target = target
+      .join(" ")
+      .split(" ")
+      .join("_")
+      .trim();
     try {
       const res = await snekfetch
-        .get(`https://www.nationstates.net/cgi-bin/api.cgi?${type}=${target.join(" ").split(" ").join("_").trim()}&q=${shard}`,
-        { headers: { "User-Agent": `Quasar v${Package.version} by Solborg (https://github.com/b0gosort/quasar/)` } });
+        .get(`https://www.nationstates.net/cgi-bin/api.cgi?${type}=${target}&q=${shard}`,
+          { headers: { "User-Agent": `Quasar v${Package.version} by Solborg (https://github.com/b0gosort/quasar/)` } });
 
       return msg.channel.send(res.body, { code: "xml" });
     } catch (err) {
@@ -23,4 +28,4 @@ module.exports = class ShardCommand extends Command {
       return msg.channel.send(`There was an error with your request: ${err.message}`);
     }
   }
-}
+};
