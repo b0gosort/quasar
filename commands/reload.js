@@ -16,8 +16,8 @@ module.exports = class ReloadCommand extends Command {
     try {
       delete require.cache[require.resolve(`./${command}`)];
       this.client.commands.delete(command);
-      const Command = require(`./${command}`);
-      const cmd = new Command(this.client);
+      const Command_ = require(`./${command}`);
+      const cmd = new Command_(this.client);
       this.client.commands.set(cmd.name, cmd);
       return msg.reply(`the ${cmd.name} command has succesfully been reloaded.`);
     } catch (err) {
