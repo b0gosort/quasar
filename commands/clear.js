@@ -1,10 +1,24 @@
-exports.run = function(client, message, args, config) {
-	if (!args || args.length < 1) return message.channel.send("One or more arguments were missing.");
+const { Command } = require("../structures");
 
-	if (config.admins.indexOf(message.author.id) === -1) return message.channel.send("You don't have permission to use the command **clear**.");
+module.exports = class ClearCommand extends Command {
+  constructor(client) {
+    super(client, {
+      name: "clear",
+      description: "Clears the specified amount of messages in the current channel, up to 99.",
+      syntax: "clear <NUMBER>",
+      admin: true,
+      args: 1
+    });
+  }
 
-	let numMessages = args[0];
-	if (numMessages < 2) return message.channel.send("The number provided was too low.");
-	message.channel.bulkDelete(parseInt(numMessages) + 1);
-	message.channel.send(`${numMessages} messages were removed.`);
-}
+  async run(message, [number]) {
+    if (isNaN(number) || (parseInt(number) > 100 || parseInt(number) < 2)) {
+      return message.reply(`${number} is not a valid amount of messages. Please provide a number more than 2 and lower than 100.`);
+    }
+    number = parseInt(number);
+    const messages = await message.channel.bulkDelete(number)
+      .catch((error) => message.channel.send(`${message.author}, I failed to clear the messages: \`${error.message}\``));
+
+    return message.reply(`I successfully cleared ${messages.size} messages`);
+  }
+};

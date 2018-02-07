@@ -1,9 +1,17 @@
-exports.run = function(client, message, args, config) {
-	if (config.admins.indexOf(message.author.id) === -1) return message.channel.send("You don't have permission to use the command **echo**.");
+const { Command } = require("../structures");
 
-	if (!args || args.length < 1) return message.channel.send("One or more arguments were missing.");
-
-	let text = args.slice(0).join(" ");
-	message.channel.send(text);
-	message.delete();
-}
+module.exports = class EchoCommand extends Command {
+  constructor(client) {
+    super(client, {
+      name: "echo",
+      description: "repeats the specified text and deletes the original.",
+      syntax: "echo <...MESSAGE>",
+      admin: true,
+      args: 1
+    });
+  }
+  async run(msg, [...message]) {
+    await msg.delete();
+    return msg.channel.send(message.join(" "));
+  }
+};

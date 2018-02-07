@@ -1,10 +1,27 @@
-exports.run = function(client, message, args, config) {
-	if (config.admins.indexOf(message.author.id) === -1) return message.channel.send("You don't have permission to use the command **reload**.");
+const { Command } = require("../structures");
 
-	if (!args || args.length < 1) return message.channel.send("One or more arguments were missing.");
+module.exports = class ReloadCommand extends Command {
+  constructor(client) {
+    super(client, {
+      name: "reload",
+      description: "Reloads a command.",
+      args: 1,
+      syntax: "reload <COMMAND>",
+      admin: true
+    });
+  }
 
-	let command = args[0];
-	delete require.cache[require.resolve(`./${command}.js`)];
-	message.channel.send(`The command **${command}** has been reloaded.`);
-	console.log(`Reloaded the command ${command}`);
-}
+  run(msg, [command]) {
+    if (!this.client.commands.has(command)) return msg.reply("That command does not exist.");
+    try {
+      delete require.cache[require.resolve(`./${command}`)];
+      this.client.commands.delete(command);
+      const Command_ = require(`./${command}`);
+      const cmd = new Command_(this.client);
+      this.client.commands.set(cmd.name, cmd);
+      return msg.reply(`the ${cmd.name} command has succesfully been reloaded.`);
+    } catch (err) {
+      return msg.reply(`there was an error reloading the ${command} command: ${err.message}`);
+    }
+  }
+};

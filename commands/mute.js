@@ -1,27 +1,38 @@
-exports.run = function(client, message, args, config) {
-	if (config.admins.indexOf(message.author.id) === -1) return message.channel.send("You don't have permission to use the command **mute**.");
+const { Command } = require("../structures");
 
-	if (!args || args.length < 1) return message.channel.send("One or more arguments were missing.");
-
-	let target = message.mentions.members.first();
-
-	if (args.length === 2 && args[0].toLowerCase() === "disable") {
-		message.channel.overwritePermissions(target, {
-			"SEND_MESSAGES": true
-		}).then(function() {
-			return message.channel.send(`**${target.user.username}** is no longer muted in ${message.channel.toString()}.`);
-		}).catch(function(error) {
-			console.log(error);
-			return message.channel.send("There was an error when attempting to mute that member.");
-		});
-	} else {
-		message.channel.overwritePermissions(target, {
-			"SEND_MESSAGES": false
-		}).then(function() {
-			return message.channel.send(`**${target.user.username}** is now muted in ${message.channel.toString()}.`);
-		}).catch(function(error) {
-			console.log(error);
-			return message.channel.send("There was an error when attempting to mute that member.");
-		});
-	}
-}
+module.exports = class MuteCommand extends Command {
+  constructor(client) {
+    super(client, {
+      name: "mute",
+      description: "Mutes the mentioned user.",
+      syntax: "mute <ENABLE-OR-DISABLE> <USER> [...REASON]",
+      guildOnly: true,
+      admin: true,
+      args: 2
+    });
+  }
+  async run(msg, [action, member, ...reason]) {
+    if (!["enable", "disable"].includes(action.toLowerCase())) return msg.reply("please provide a valid option.");
+    const user = msg.mentions.members.first() || msg.guild.members.get(member);
+    if (!user) return msg.reply("you must provide a user to mute.");
+    switch (action.toLowerCase()) {
+      case "enable":
+        try {
+          await msg.channel.overwritePermissions(user, { SEND_MESSAGES: false });
+          return msg.reply(`I've successfully muted ${user}: ${reason.join(" ") || "No reason provided"}.`);
+        } catch (err) {
+          console.error("[DISCORD] Error while muting:\n", err);
+          return msg.reply(`I failed to mute ${user}: ${err.message}`);
+        }
+      case "disable":
+        try {
+          await msg.channel.permissionOverwrites.get(user.id).delete();
+          return msg.reply(`I successfully unmuted ${user}.`);
+        } catch (err) {
+          console.error("[DISCORD] Error while unmuting:\n", err);
+          return msg.reply(`I failed to unmute ${user}: ${err.message}`);
+        }
+    }
+    return null;
+  }
+};

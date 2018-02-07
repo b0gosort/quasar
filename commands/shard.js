@@ -1,19 +1,31 @@
-exports.run = function(client, message, args, config) {
-	const request = require("request");
+const snekfetch = require("snekfetch");
+const { Command } = require("../structures");
+const Package = require("../package.json");
 
-	if (!args || args.length < 3) return message.channel.send("One or more arguments were missing.");
+module.exports = class ShardCommand extends Command {
+  constructor(client) {
+    super(client, {
+      name: "shard",
+      description: "returns the specified shard info for the specified nation or region",
+      syntax: "shard <TARGET TYPE> <SHARD> <TARGET NATION OR REGION>",
+      args: 3
+    });
+  }
+  async run(msg, [type, shard, ...target]) {
+    target = target
+      .join(" ")
+      .split(" ")
+      .join("_")
+      .trim();
+    try {
+      const res = await snekfetch
+        .get(`https://www.nationstates.net/cgi-bin/api.cgi?${type}=${target}&q=${shard}`,
+          { headers: { "User-Agent": `Quasar v${Package.version} by Solborg (https://github.com/b0gosort/quasar/)` } });
 
-	let [type, shard, ...target] = args;
-
-	let targetURL = `https://www.nationstates.net/cgi-bin/api.cgi?${type}=${target.join(" ")}&q=${shard}`;
-	request({
-		url: targetURL,
-		headers: {"User-Agent": "Quasar Discord Bot by Solborg"}
-	}, function(error, response, body) {
-		console.log("Made request to: " + targetURL);
-		console.log("Error: " + error);
-		console.log("Status code: " + response);
-
-		message.channel.send("```xml\n" + body + "\n```");
-	});
-}
+      return msg.channel.send(res.body, { code: "xml" });
+    } catch (err) {
+      console.error("[DISCORD] Error:\n", err);
+      return msg.channel.send(`There was an error with your request: ${err.message}`);
+    }
+  }
+};
