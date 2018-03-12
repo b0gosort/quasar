@@ -1,4 +1,4 @@
-exports.run = (client, message, args, config) => {
+exports.run = function(client, message, args, config) {
 	const request = require("request");
 	const parseString = require("xml2js").parseString;
 

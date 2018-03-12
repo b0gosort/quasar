@@ -1,4 +1,4 @@
-exports.run = (client, message, args, config) => {
+exports.run = function(client, message, args, config) {
 	const request = require("request");
 
 	if (!args || args.length < 3) return message.channel.send("One or more arguments were missing.");

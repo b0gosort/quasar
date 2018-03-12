@@ -12,6 +12,9 @@ client.on("ready", () => {
 
 client.on("guildMemberAdd", (member) => {
 	member.guild.channels.get(config.joinLog).send(`Welcome, ${member.user.toString()}. To be assigned a role, please run:\n` + "```.register <YOUR NATION NAME>```");
+	member.send(`Welcome to **${member.guild.name}**. Please check the server for instructions to be assigned a role.`).catch(function(error) {
+		return console.log(`Upon sending welcome DM: ${error}`);
+	})
 });
 
 client.on("guildMemberRemove", (member) => {
@@ -24,7 +27,7 @@ client.on("message", (message) => {
 	const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 	const command = args.shift().toLowerCase();
 
-	if (commandFiles.indexOf(command + ".js") === -1) return message.channel.send(`The command **${command}** does not exist.`);
+	if (commandFiles.indexOf(command + ".js") === -1) return;
 	try {
 		let commandFile = require(`./commands/${command}.js`);
 		commandFile.run(client, message, args, config);

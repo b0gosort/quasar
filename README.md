@@ -7,6 +7,7 @@ This bot runs with Node.js and requires a `config.json` file. Here is a template
 ```json
 {
 	"token": "YOUR BOT USER TOKEN",
+	"mashapeKey": "MASHAPE API KEY FOR WORDSAPI",
 	"prefix": "COMMAND PREFIX",
 	"admins": [
 		"USER ID OF PRIMARY ADMIN",
@@ -25,6 +26,7 @@ Here is a list of current commands:
 
 * ban
 * clear
+* define
 * echo
 * help
 * kick
@@ -34,6 +36,7 @@ Here is a list of current commands:
 * register
 * reload
 * shard
+* version
 
 Command code is stored in the `commands` folder.
 

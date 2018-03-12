@@ -1,4 +1,4 @@
-exports.run = (client, message, args, config) => {
+exports.run = function(client, message, args, config) {
 	if (!args || args.length < 1) return message.channel.send("One or more arguments were missing.");
 
 	if (args[0] === "esti") return message.channel.send("**Esteriore** is no longer in the server.");
