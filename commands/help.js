@@ -8,10 +8,6 @@ exports.run = function(client, message, args, config) {
 			desc: "clears the specified number of recent messages, admin-only",
 			syntax: "clear <NUMBER OF MESSAGES>"
 		},
-		define: {
-			desc: "returns the definition(s) of the specified word",
-			syntax: "define <WORD>"
-		},
 		echo: {
 			desc: "repeats the specified text and deletes the original, admin-only",
 			syntax: "echo <TEXT>"
