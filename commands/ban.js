@@ -15,5 +15,5 @@ exports.run = function(client, message, args, config) {
 		message.channel.send("The ban reason could not be delivered via direct message.");
 	});
 
-	return target.ban(reason_;)
+	return target.ban(reason);
 }
