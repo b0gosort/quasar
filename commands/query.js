@@ -5,7 +5,7 @@ exports.run = function(client, message, args, config) {
 
 	message.channel.send("Getting result from Wolfram|Alpha...");
 
-	let query = encodeURI(args.join(" ").toLowerCase());
+	let query = encodeURIComponent(args.join(" ").toLowerCase());
 	let queryURL = `https://api.wolframalpha.com/v1/result?appid=${config.wolframAlpha}&i=${query}%3F&units=metric`;
 
 	request({
