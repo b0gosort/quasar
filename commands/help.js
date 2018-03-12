@@ -32,6 +32,10 @@ exports.run = function(client, message, args, config) {
 			desc: "pings the user back",
 			syntax: "ping"
 		},
+		query: {
+			desc: "returns a short answer response from Wolfram|Alpha with the given input",
+			syntax: "query <QUERY>"
+		},
 		region: {
 			desc: "returns an overview of the specified NS region",
 			syntax: "region <REGION NAME>"

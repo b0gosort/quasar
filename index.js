@@ -22,12 +22,20 @@ client.on("guildMemberRemove", (member) => {
 });
 
 client.on("message", (message) => {
-	if (!message.content.startsWith(config.prefix) || message.author.bot) return;
+	if ((!message.content.startsWith(config.prefix) && !message.content.startsWith(client.user.toString())) || message.author.bot) return;
 
-	const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-	const command = args.shift().toLowerCase();
+	var args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+	var command;
+
+	if (message.content.startsWith(client.user.toString())) {
+		args.shift();
+		command = "query";
+	} else {
+		command = args.shift().toLowerCase();
+	}
 
 	if (commandFiles.indexOf(command + ".js") === -1) return;
+
 	try {
 		let commandFile = require(`./commands/${command}.js`);
 		commandFile.run(client, message, args, config);
